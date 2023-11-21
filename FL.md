@@ -4,7 +4,7 @@
 
 + #### 联邦学习（!!! 第三页）
 
-+ #### 同态加密
++ #### 同态加密2
 
   + High-efficient preparation and screening of electrocatalysts using a closed bipolar electrode array system
   + [PrivFL: Practical privacy-preserving federated regressions on high-dimensional data over mobile networks](https://dl.acm.org/doi/abs/10.1145/3338466.3358926)
