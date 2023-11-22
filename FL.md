@@ -2,86 +2,117 @@
 
 ### 基础概念
 
-+ #### 联邦学习（!!! 第三页）
+#### 联邦学习聚合方案（!!! 第三页）
 
-+ #### 同态加密2
++ FedAvg
++ FedSGD
 
-  + High-efficient preparation and screening of electrocatalysts using a closed bipolar electrode array system
-  + [PrivFL: Practical privacy-preserving federated regressions on high-dimensional data over mobile networks](https://dl.acm.org/doi/abs/10.1145/3338466.3358926)
-    + 使⽤Paillier同态加密算法对⽤⼾的局部梯度进⾏加密来获取参数。
-  + Privacy preserving deep learning via additively homomorphic encryption
+#### 同态加密
 
-+ #### 差分隐私
++ High-efficient preparation and screening of electrocatalysts using a closed bipolar electrode array system
++ [PrivFL: Practical privacy-preserving federated regressions on high-dimensional data over mobile networks](https://dl.acm.org/doi/abs/10.1145/3338466.3358926)
+  + 使⽤Paillier同态加密算法对⽤⼾的局部梯度进⾏加密来获取参数。
++ Privacy preserving deep learning via additively homomorphic encryption
++ 全同态加密
+  + FHE，CKKS
 
-  + 高斯机制：
-    + 计算查询结果的真实值。
-    + 生成一个服从高斯分布（正态分布）的随机数。
-    + 将随机数乘以敏感度并除以隐私参数 ε。
-    + 将结果加到真实值上，得到最终的扰动结果。
+#### 差分隐私
 
-+ #### 秘密共享
++ 高斯机制：
+  + 计算查询结果的真实值。
+  + 生成一个服从高斯分布（正态分布）的随机数。
+  + 将随机数乘以敏感度并除以隐私参数 ε。
+  + 将结果加到真实值上，得到最终的扰动结果。
++ S. Truex et al., “A hybrid approach to privacy-preserving federated learning,” in Proc. 12th ACM Workshop Artif. Intell. Secur. (AISec), 2019, pp. 1–11.
+  + 使⽤差分隐私（DP）和安全多⽅计算
 
-+ #### 隐私攻击
+#### 秘密共享
 
-  + 模型反转攻击：使用反向传播技术来逆向计算梯度，然后推断原始数据的特征或敏感信息。
+#### 隐私攻击
 
-    + Privacy in Pharmacogenetics: An End-to-End Case Study of Personalized Warfarin Dosing
-      + 逆向工程的方法，通过分析机器学习模型的输出梯度，推断出了个体的敏感信息
++ 数据泄露：由于梯度是客⼾端本地数据的映射，如果客⼾端直接上传明⽂梯度，攻击者可以在⼀定程度上推断或获取诚实客⼾端的原始信息（使用反向传播技术来逆向计算梯度，然后推断原始数据的特征或敏感信息）
+  + Privacy in Pharmacogenetics: An End-to-End Case Study of Personalized Warfarin Dosing
+    + 逆向工程的方法，通过分析机器学习模型的输出梯度，推断出了个体的敏感信息
 
-    + Inverting gradients-how easy is it to break privacy in federated learning?
-      + 余弦相似度和对抗性攻击，重建⾼分辨率原始
-    + Model inversion attacks that exploit confidence information and basic countermeasures
-      + 利用模型输出的置信度信息来实施模型反转攻击
-    + Deep models under the GAN: Information leakage from collaborative deep learning
-      + 探讨了在协作深度学习中信息泄漏的问题，特别关注生成对抗网络（GAN）的应用，并研究了模型反转攻击的可能性
+  + Inverting gradients-how easy is it to break privacy in federated learning?
+    + 余弦相似度和对抗性攻击，重建⾼分辨率原始
+  + Model inversion attacks that exploit confidence information and basic countermeasures
+    + 利用模型输出的置信度信息来实施模型反转攻击
+  + Deep models under the GAN: Information leakage from collaborative deep learning
+    + 探讨了在协作深度学习中信息泄漏的问题，特别关注生成对抗网络（GAN）的应用，并研究了模型反转攻击的可能性
+  + Analyzing User-Level Privacy Attack Against Federated Learning
 
-  + 成员推理攻击
++ 成员推理攻击：求解器和验证器交换⼀些中间结果以协作完成本 地更新的聚合。因此，他们可能会尝试从中间结果中推断出敏感信息
 
-    + Membership Inference Attacks Against Machine Learning Models via Prediction Sensitivity
-      + 已知一条记录，推断记录是否被用于某一模型的训练。例如，知道某个患者的临床记录被⽤来训练与疾病相关的模型可以揭⽰患者患有这种疾
-      + 影子模型：攻击者训练多个和目标模型相似的模型，比较他们对某条记录的预测值，推断出目标模型训练集中是否有这一记录
+  + Membership Inference Attacks Against Machine Learning Models via Prediction Sensitivity
+    + 已知一条记录，推断记录是否被用于某一模型的训练。例如，知道某个患者的临床记录被⽤来训练与疾病相关的模型可以揭⽰患者患有这种疾
+    + 影子模型：攻击者训练多个和目标模型相似的模型，比较他们对某条记录的预测值，推断出目标模型训练集中是否有这一记录
 
-  + 投毒攻击 !!! 论文 VPPFL 第二页右侧
++ 投毒攻击 !!! 论文 VPPFL 第二页右侧
+
+#### 投毒攻击
+
++ 投毒攻击：
+  + 可分为 Scaling 有针对性攻击；Krum 攻击和 Trim 攻击，是无差别攻击
+  + 可分为数据中毒攻击和模型中毒攻击，通过毒害设备的本地数据 或是 直接操纵和控制设备与服 务器之间通信的模型更新
+
++ 抗投毒攻击
+  + Krum
+    +  P. Blanchard, E. M. E. Mhamdi, R. Guerraoui, and J. Stainer, “Machine learning with adversaries: Byzantine tolerant gradient descent,” in Proc. 31st Int. Conf. Neural Inf. Process. Syst. (NIPS), 2017, pp. 118–128.
+    + 在每次迭代中选择n个模型之⼀，根据梯度之间的欧⼏⾥德距离， 该模型最有可能是良性的
+  + 修剪均值
+    + D. Yin, Y. Chen, K. Ramchandran, and P. L. Bartlett, “Byzantine-robust distributed learning: Towards optimal statistical rates,” in Proc. Int. Conf. Mach. Learn. (ICML), 2018, pp. 5636–5645.
+  + FLTrust ！
+    + X. Cao, M. Fang, J. Liu, and N. Z. Gong, “FLTrust: Byzantine-robust federated learning via trust bootstrapping,” in Proc. Netw. Distrib. Syst. Secur. Symp., 2021, pp. 1–18, doi: 10.14722/ndss.2021.24434.
+    + 可信根数据集和余弦相似度作为判断恶意梯度的标准
 
 ### 研究方向1
 
-+ #### 同态加密和抗投毒技术
-  
-  + Privacy-Preserving Byzantine-Robust Federated_Learning_via_Blockchain_Systems
-    + 们利⽤余弦相似性来检测⽤⼾上传的梯，全同态加密实现安全聚
-  + Differentially Private Byzantine-Robust Federated Learning
-    + 防⽌拜占庭参与者发起的对抗性攻击，并通过新颖的聚合协议实现差异隐私
-  + ShieldFL: Mitigating Model Poisoning Attacks in Privacy-Preserving Federated Learning
-    + ⽤双陷⻔同态加密，以抵抗模型中毒攻击⽽不泄露隐私
-  + Privacy-Enhanced Federated Learning Against Poisoning Adversaries
-    + 基于投毒的同态加密，其中的决策部分，基于孤立森林，引自论文 
-  + FedDefender: Client-Side Attack-Tolerant Federated Learning
-    + 容忍攻击的本地元更新
-      + 提前在本地进行模拟扰动训练，使得神经网络对噪声扰动不敏感
-    + 容忍攻击的全局知识
-      + 在模型中毒攻击的情况下，全局模型的可信度可能会受到损害，进行全局知识蒸馏（基于梯度下降优化的固有本质，模型深层更容易过度适应噪声，所以只取全局知识的神经网络中间层，设定置信度，进行一定的全局蒸馏损失）
-  
-+ #### 差分隐私和抗投毒技术
-  
-  + VPPFL: A Verifiable Privacy-Preserving Federated Learning Scheme
-    + 基于此论文的相关工作进行学习
-    + 论文方法：服务器1生成高斯噪声，对称加密发送给参与方；服务器1发送差分矩阵（噪声平均值）给服务器2，用于服务器2消除噪声影响；服务器2使用聚类算法找到恶意用户
-  + A Differentially Private Federated Learning Model Against Poisoning Attacks in Edge Computing
-    + 基于边缘计算的针对中毒攻击的差分私有FL
+#### 同态加密和抗投毒技术
+
++ Privacy-Preserving Byzantine-Robust Federated_Learning_via_Blockchain_Systems
+  + 们利⽤余弦相似性来检测⽤⼾上传的梯，全同态加密实现安全聚
++ Differentially Private Byzantine-Robust Federated Learning
+  + 防⽌拜占庭参与者发起的对抗性攻击，并通过新颖的聚合协议实现差异隐私
++ ShieldFL: Mitigating Model Poisoning Attacks in Privacy-Preserving Federated Learning
+  + ⽤双陷⻔同态加密，以抵抗模型中毒攻击⽽不泄露隐私
++ Privacy-Enhanced Federated Learning Against Poisoning Adversaries
+  + 尝试修改其中的决策部分，基于孤立森林
+  + 第一步：客户端本地训练 -> 同态加密 -> 上传梯度 Gx
+  + 第二步，服务器将 Gx 盲化成 Rx 并发送给云平台 CP -> CP拥有私钥可以解密 Rxi 得到 dxi -> CP 找到中位数 dmedi 并使用公钥加密发送给服务器 -> 服务器去除盲化得到 Gmedi，是梯度的中位数
+  + 第三步，以该中位数向量为基准来计算得到各个客户端上传的梯度向量是否异常
++ FedDefender: Client-Side Attack-Tolerant Federated Learning
+  + 容忍攻击的本地元更新
+    + 提前在本地进行模拟扰动训练，使得神经网络对噪声扰动不敏感
+  + 容忍攻击的全局知识
+    + 在模型中毒攻击的情况下，全局模型的可信度可能会受到损害，进行全局知识蒸馏（基于梯度下降优化的固有本质，模型深层更容易过度适应噪声，所以只取全局知识的神经网络中间层，设定置信度，进行一定的全局蒸馏损失）
+
+#### 差分隐私和抗投毒技术
+
++ VPPFL: A Verifiable Privacy-Preserving Federated Learning Scheme
+  + 基于此论文的相关工作进行学习
+  + 论文方法：服务器1生成高斯噪声，对称加密发送给参与方；服务器1发送差分矩阵（噪声平均值）给服务器2，用于服务器2消除噪声影响；服务器2使用聚类算法找到恶意用户
++ A Differentially Private Federated Learning Model Against Poisoning Attacks in Edge Computing
+  + 基于边缘计算的针对中毒攻击的差分私有FL
 
 ### 研究方向2
 
-设备异构下的同态加密和差分隐私
+#### 设备异构下的同态加密和差分隐私
+
+异构物联网下资源高效的分层协同联邦学习方法，用于解决数据分布不均匀和设备计算通信性能不同的问题
+
+分层联邦学习：添加一层边缘层，收集来自多个设备的模型更新，并进行一定程度的聚合和处理，然后中心服务器进行进一步的聚合
 
 ### 研究方向3
 
-+ 简单的秘密共享
-  + **[idea]** 设置两个服务器，由服务器1为每一个参与方生成随机数矩阵并发送给参与方，服务器2收到一轮参数后，向服务器1索要本轮参与方随机数矩阵的聚合结果，得到真实聚合
-    + 每结束一轮聚合，服务器1都和全部参与方重新设定随机数矩阵，防止服务器2猜出随机数矩阵
-    + 确保服务器1，2是不合谋的
-  + **[idea]** 参与方将数据拆成n份，发送给n个服务器，n个服务器聚合后再相加
-    + 服务器允许诚实且好奇，允许n-2个服务器合谋，参与方允许诚实且好奇
-    + 为什么联邦学习不直接使用这种方法 // TODO
+#### 简单的秘密共享
+
++ **[idea]** 设置两个服务器，由服务器1为每一个参与方生成随机数矩阵并发送给参与方，服务器2收到一轮参数后，向服务器1索要本轮参与方随机数矩阵的聚合结果，得到真实聚合
+  + 每结束一轮聚合，服务器1都和全部参与方重新设定随机数矩阵，防止服务器2猜出随机数矩阵
+  + 确保服务器1，2是不合谋的
++ **[idea]** 参与方将数据拆成n份，发送给n个服务器，n个服务器聚合后再相加
+  + 服务器允许诚实且好奇，允许n-2个服务器合谋，参与方允许诚实且好奇
+  + 过于简单达不到论文的工作量，需要将其搭配其他优化
 
 ###  如何搜索论文被引用
 
@@ -93,7 +124,7 @@
 
 [paperswithcode.com](https://paperswithcode.com)
 
-### 1. 论文（秘密共享屏蔽参与方单次权重）：
+### 1 论文（秘密共享屏蔽参与方单次权重）
 
 Practical Secure Aggregation for Privacy-Preserving Machine Learning
 
@@ -103,25 +134,25 @@ https://juejin.cn/post/7041816522347511816
 
 https://zhuanlan.zhihu.com/p/341898547
 
-#### 1.1 前置知识
+#### 前置知识
 
 1. ##### DiffieHellman
 
 在通信渠道不安全的情况下，沟通一个密钥的方法
 
-\1.   Alice 和 Bob 先对 p 和 g 达成一致，而且公开
+1.   Alice 和 Bob 先对 p 和 g 达成一致，而且公开
 
-\2.   Alice取一个私密的整数 a，不让任何人知道，发给 Bob 计算结果：*A*=g^a mod p. Eve 也看到了A的值。
+2.   Alice取一个私密的整数 a，不让任何人知道，发给 Bob 计算结果：*A*=g^a mod p. Eve 也看到了A的值。
 
-\3.   类似 Bob 取一私密的整数 b, 发给 Alice 计算结果 *B*= g^b mod *p.* 同样Eve也会看见传递的B是什么。
+3.   类似 Bob 取一私密的整数 b, 发给 Alice 计算结果 *B*= g^b mod *p.* 同样Eve也会看见传递的B是什么。
 
-\4.   Alice 计算出 *S*=*B^a* mod *p*=g^ab mod *p.*
+4.   Alice 计算出 *S*=*B^a* mod *p*=g^ab mod *p.*
 
-\5.   Bob 也能计算出 *S*=*A^b* mod *p*=g^ab mod *p.*
+5.   Bob 也能计算出 *S*=*A^b* mod *p*=g^ab mod *p.*
 
-\6.   Alice 和 Bob 现在就拥有了一个共用的密钥 *S.*
+6.   Alice 和 Bob 现在就拥有了一个共用的密钥 *S.*
 
-#### 1.2 从研究脉络梳理：
+#### 从研究脉络梳理：
 
 思路1：每两个用户，例如用户 u 和用户 v 协商一个随机数 S u,v（S 有顺序 —— 即 S u,v 和 S v,u 是两个值），每个用户计算自己的参数值时将所有和其他用户的随机向量值先加再减。
 
@@ -143,7 +174,7 @@ https://zhuanlan.zhihu.com/p/341898547
 
 聚合时，服务器会通过秘密共享重建所有在线参与方的 bi，都减掉，另外重建掉线者的 S u,v 完成聚合
 
-#### 1.3 总的流程
+#### 总的流程
 
 Round 0 是关于 D-H 以及 PRG 的操作
 
@@ -157,11 +188,13 @@ Round 4 服务器发送幸存者列表，参与方为活跃用户发送 bu，为
 
 ![image-20230912164329304](C:\Users\10655\AppData\Roaming\Typora\typora-user-images\image-20230912164329304.png)
 
-### 2. 论文（差分隐私和阈值同态加密）：A Hybrid Approach to Privacy-Preserving Federated Learning
+### 2 论文（差分隐私和阈值同态加密）
+
+A Hybrid Approach to Privacy-Preserving Federated Learning
 
 https://blog.csdn.net/qq_44026293/article/details/112062798
 
-#### 2.1 前置知识
+#### 前置知识
 
 1. ##### 差分隐私 DP：
 
@@ -219,7 +252,7 @@ https://blog.csdn.net/qq_44026293/article/details/112062798
 
    （2）使用差分隐私
 
-#### 2.2 论文贡献
+#### 论文贡献
 
 - 提出一个新的FL系统（训练方法），在保证数据隐私的基础上有着比普通的FL系统更高的准确率  
 
@@ -237,7 +270,7 @@ https://blog.csdn.net/qq_44026293/article/details/112062798
 
   服务器发送Q给参与方 -> 参与方进行训练并加噪声再加密得到 Ri' -> 服务器聚合 Ri' 得到 R' -> 发还给参与方 R' -> 每个参与方进行解密得到 Ri'' -> 服务器聚合得到 R'' 为最终权重更新 M
 
-#### 2.3 提出问题及思考
+#### 提出问题及思考
 
 1. 为什么要同时使用差分隐私和阈值同态加密？
 
@@ -253,9 +286,9 @@ https://blog.csdn.net/qq_44026293/article/details/112062798
 
    我认为可行，一般场景下不会出现超过t个参与方合谋攻击的情况，需要学习其他论文和隐私攻击方式来印证。
 
-### 3. 论文（服务端可信时，添加的模型扰动）An Accuracy-Lossless Perturbation Method for Defending Privacy Attacks in Federated Learning
+### 3 论文（服务端可信时，添加的模型扰动）An Accuracy-Lossless Perturbation Method for Defending Privacy Attacks in Federated Learning
 
-#### 3.1 摘要：
+#### 摘要：
 
 https://github.com/Kira0096/PBPFL
 
@@ -273,7 +306,7 @@ https://github.com/Kira0096/PBPFL
 
 而基于我们所提供的**模型加密**训练方案，过程中 server（数据需求方）能够获取解密后的模型，clients（数据提供商）模型迭代过程中仅能够 access 参数加密后的模型，无法感知到真实的模型梯度以及模型预测结果，从而最大程度的保证模型隐私安全，即保护数据需求方的权益。
 
-#### 3.2 前置知识
+#### 前置知识
 
 1. ##### 联邦学习训练深度神经⽹络（DNN）
 
@@ -289,7 +322,7 @@ https://github.com/Kira0096/PBPFL
 
    新矩阵元素定义为矩阵 A、B 对应元素的乘积 (A * B)ij = aij * bij
 
-#### 3.3 思考
+#### 思考
 
 1. 为什么能在添加噪声的情况下不影响模型精度？
 
@@ -297,11 +330,13 @@ https://github.com/Kira0096/PBPFL
 
    论文方法会记录噪声向量r，并证明了扰动梯度和真实梯度间的关系，在聚合后再恢复准确精度
 
-### 4 论文（使用区块链作为联邦学习激励机制）FLChain: A Blockchain for Auditable Federated Learning with Trust and Incentive
+### 4 论文（使用区块链作为联邦学习激励机制）
+
+FLChain: A Blockchain for Auditable Federated Learning with Trust and Incentive
 
 https://zhuanlan.zhihu.com/p/420633671
 
-#### 4.1 前置知识
+#### 前置知识
 
 1. ##### 拜占庭攻击
 
@@ -309,7 +344,7 @@ https://zhuanlan.zhihu.com/p/420633671
 
    联邦学习中的拜占庭攻击是通过污染本地数据或直接修改模型梯度实现的，防御方式一般由在服务端聚合时筛选威胁大的权重实现，也有修改聚合规则，客户端添加全局权重检测等方法。
 
-#### 4.2 论文贡献
+#### 论文贡献
 
 提出FLChain来构建一个分散的、可公开审计的、健康的、有信任和激励的联邦学习生态系统。 在FLChain中，诚实的客户可以根据自己的贡献通过一个经过训练的模型获得公平分配的利润，恶意的客户可以被及时发现并受到严厉的惩罚。
 
@@ -325,7 +360,9 @@ https://zhuanlan.zhihu.com/p/420633671
 
 
 
-### 5 同态加密 针对不规则用户优化 Privacy-Preserving_Federated_Deep_Learning_With_Irregular_Users
+### 5 同态加密 针对不规则用户优化 
+
+Privacy-Preserving_Federated_Deep_Learning_With_Irregular_Users
 
 2022 年
 
@@ -337,7 +374,7 @@ https://zhuanlan.zhihu.com/p/420633671
 
 文中提到的不规则用户处理方式是：依据局部梯度和全局梯度方向的一致性得到用户可信度，调整梯度聚合比例
 
-#### 5.1 前置知识
+#### 前置知识
 
 1. ##### 姚氏混淆电路
 
@@ -345,7 +382,9 @@ https://zhuanlan.zhihu.com/p/420633671
 
    它的核心技术是将两方参与的安全计算函数编译成布尔电路的形式，并将真值表加密打乱，从而实现电路的正常输出而又不泄露参与计算的双方私有信息。由于任何安全计算函数都可转换成对应布尔电路的形式，相较其他的安全计算方法，具有较高的通用性，因此引起了业界较高的关注度。
 
-### 6 同态加密以及抗投毒技术 Privacy-Enhanced Federated Learning Against Poisoning Adversaries
+### 6 同态加密以及抗投毒技术
+
+Privacy-Enhanced Federated Learning Against Poisoning Adversaries
 
 单纯的 PPFL（preserving-privacy federated learning）方案致力于各方的模型信息不可区分来抵御推理攻击，而抗投毒攻击的方案则致力于根据异常数据与正常数据的差异来清除异常数据（也就是去寻找数据间的差异性）。显然两者的准求是有矛盾的，而如何解决这个矛盾是现在大家都热衷的问题，
 
@@ -387,7 +426,7 @@ https://zhuanlan.zhihu.com/p/410806354
 
    
 
-### 论文 7 差分隐私 异步优化
+### 7 差分隐私 异步优化
 
 PADL_Privacy-Aware_and_Asynchronous_Deep_Learning_for_IoT_Applications
 
@@ -415,7 +454,7 @@ PADL_Privacy-Aware_and_Asynchronous_Deep_Learning_for_IoT_Applications
 
 ）异步更新：如图3所⽰，各数据采集点与云服务器交互开始时，各数 据采集点上传训练好的模型参数，并为下⼀次训练需要⼀个新的模型 ing。对于m ∈ [0, M−1] 的模型请求，云端将标记为m+1 的模型替 换为数据采集站上传的模型，并返回标记为m的模型。⽪胡尔等⼈。 [41] 实验证明，当服务器中的模型数量M和数据采集站点数量N满⾜： M2 = N时，可以完全实现异步
 
-### 论文 8 差分隐私 敏感度分片
+### 8 差分隐私 敏感度分片
 
 Protect_Privacy_from_Gradient_Leakage_Attack_in_Federated_Learning
 
@@ -447,11 +486,9 @@ Protect_Privacy_from_Gradient_Leakage_Attack_in_Federated_Learning
 
 https://blog.csdn.net/wenzhu2333/article/details/124556920
 
-### 论文 9 秘密共享 优化论文1
+### 9 秘密共享 针对论文1的优化
 
-LI G H TSE CAG G: A LIGHTWEIGHT AND VERSATILE DESIGN FOR SECURE AGGREGATION IN FEDERATED LEARNING
-
-基于论文1的设计优化
+LIGHTSECAGG: A LIGHTWEIGHT AND VERSATILE DESIGN FOR SECURE AGGREGATION IN FEDERATED LEARNING
 
 回顾论文1的内容：服务器会重建聚合数据，而不知晓每个用户的数据
 
@@ -459,7 +496,7 @@ LI G H TSE CAG G: A LIGHTWEIGHT AND VERSATILE DESIGN FOR SECURE AGGREGATION IN F
 
 保护个⼈更新的隐私，⽽不依赖于差异隐私（Truex et al., 2020）或可信执⾏环境（TEE） （Nguyen 等⼈， 2021）。
 
-### 论文 10 新的秘密共享方法
+### 10 新的秘密共享方法
 
 FastSecAgg: Scalable Secure Aggregation for Privacy-Preserving Federated Learning
 
@@ -467,13 +504,13 @@ FastSecAgg: Scalable Secure Aggregation for Privacy-Preserving Federated Learnin
 
 每个客户端将梯度分发给N个客户端（通过服务器发送，这时需要进行对称加解密）
 
-### 论文 11 拜占庭攻击
+### 11 拜占庭攻击
 
 服务器根据根数据集以及每轮更新的方向，给参与方发来的梯度打分，称为信任分数
 
 基线：是利⽤拜占庭稳健的聚合规则，该规则本质上是⽐较客⼾端的本地模型更新并 在使⽤它们更新全局模型之前删除统计异常值，但是重点是没有预训练小模型
 
-### 论文 12 客户端对恶意服务器进行防御
+### 12 客户端对恶意服务器进行防御
 
 Fusion Efficient and Secure Inference Resilient to Malicious Servers
 
@@ -481,7 +518,7 @@ Fusion Efficient and Secure Inference Resilient to Malicious Servers
 
 论文使用较强的威胁模型（非诚实好奇的对手），方案是：参与方知晓样本标签，对服务器计算结果进行评判，参与方将一组公开样本和查询样本混合，服务器如果作弊则必须为查询样本的所有复制样本给出不正确但一致的结果，来保护服务器诚实性
 
-### 论文 13 隐私保护综述论文一些知识
+### 13 隐私保护综述论文一些知识
 
 指出联邦学习中，不是每个参与方都有机会参与每一轮训练，通常利用采样的方式确定哪些用户可以参与训练过程
 
@@ -501,7 +538,7 @@ FedAVG 方法允许参与方在服务器聚合参数之前多次迭代计算梯�
 + 差分隐私需要有可信的第三方数据收集 者，保证所收集的数据不会被窃取和泄露。在实际应用中， 第三方数据收集者是否真正可信很难保证。本地化差分隐 私将数据隐私化的工作转移到用户端，在数据发出用户设备 之前先进行扰动，避免了不可信第三方造成的数据泄露
 + 差分隐私就是简单的添加随机扰动
 
-### 论文 14 联邦学习隐私综述
+### 14 联邦学习隐私综述
 
 Federated learning as a privacy solution-an overview
 
@@ -513,7 +550,7 @@ FedMA 该平均算法提出了对具有相似特征提取签名的隐藏元素�
 
 FedSGD FedPer FedDyn FedDist
 
-### 论文 15 联邦学习隐私综述 2023-2
+### 15 联邦学习隐私综述 2023-2
 
 Review on security of federated learning and its application in
 
@@ -572,7 +609,7 @@ TensorFlow 框架和微众银⾏ Fate 框 架。还有其他衍⽣框架，例�
 > 6. **通信协议**：
 >    - 参与方之间应当建立起一套通信协议，明确如何安全地交换特征信息，如何处理不匹配的数据和缺失值等问题。
 
-### 论文 16 同态加密+客户端投毒攻击
+### 16 同态加密+客户端投毒攻击
 
 FedDefender: Client-Side Attack-Tolerant Federated Learning
 
@@ -597,13 +634,3 @@ FedDefender: Client-Side Attack-Tolerant Federated Learning
 #### 阅读源码
 
 使用简单的方法：模拟多个参与方，添加模拟扰动、知识蒸馏工作进行本地数据训练，再进行聚合，输出模型准确度
-
-### 异构联邦学习
-
-异构物联网下资源高效的分层协同联邦学习方法，用于解决数据分布不均匀和设备计算通信性能不同的问题
-
-分层联邦学习：添加一层边缘层，收集来自多个设备的模型更新，并进行一定程度的聚合和处理，然后中心服务器进行进一步的聚合
-
-### 论文 - 隐私攻击
-
-Analyzing User-Level Privacy Attack Against Federated Learning
